@@ -118,7 +118,7 @@ if avg_EAR < EAR_THRESHOLD:
       </section>
 
       {/* Images */}
-      {project.images && (
+      {project?.images && (
         <>
           <section className="mb-12">
             <img

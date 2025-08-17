@@ -13,3 +13,15 @@ node_modules/
 dist/
 *.pack
 *.gz
+
+# Next.js build output
+.next/
+.next
+out/
+
+# Other common ignores
+node_modules/
+.env
+.env.local
+.env.production
+.DS_Store

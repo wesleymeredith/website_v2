@@ -23,7 +23,8 @@ const ProjectPage: React.FC = () => {
 
   if (!project) {
     return (
-      <Layout title="Project Not Found" description="The requested project could not be found">
+      /* Project not found*/
+      <Layout title=" " description="The requested project could not be found">
         <div className="pt-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="text-center">

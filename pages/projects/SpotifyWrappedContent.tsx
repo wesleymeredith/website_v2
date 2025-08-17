@@ -113,7 +113,7 @@ const SpotifyWrappedContent: React.FC<{ project: Project }> = ({ project }) => {
         </div>
       </div>
       {/* Add Image 1 with the login box*/}
-      {project.images && (
+      {project?.images && (
         <div className="mb-12">
           <img
             src={project.images[1]}
@@ -123,7 +123,7 @@ const SpotifyWrappedContent: React.FC<{ project: Project }> = ({ project }) => {
         </div>
       )}
       {/* Add Image 2 */}
-      {project.images && (
+      {project?.images && (
         <div className="mb-12">
           <img
             src={project.images[2]}
@@ -133,7 +133,7 @@ const SpotifyWrappedContent: React.FC<{ project: Project }> = ({ project }) => {
         </div>
       )}
       {/* Add Image 3 */}
-      {project.images && (
+      {project?.images && (
         <div className="mb-12">
           <img
             src={project.images[3]}
