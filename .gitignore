@@ -17,7 +17,6 @@ dist/
 # Next.js build output
 .next/
 .next
-out/
 
 # Other common ignores
 node_modules/
