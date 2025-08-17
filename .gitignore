@@ -1,0 +1,15 @@
+node_modules
+dist
+build
+DEV_NOTES.txt
+
+.cursor/
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+node_modules/
+dist/
+*.pack
+*.gz
