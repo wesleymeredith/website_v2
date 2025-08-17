@@ -1,12 +1,15 @@
+// pages/projects/VailContent.tsx
 import React from 'react';
-import { Project } from '../../data/projects';
+import type { GetStaticProps } from 'next';
 import { Github, Play, FileText } from 'lucide-react';
+import { projects, Project } from '../../data/projects';
 
-const ProjectLinks: React.FC<{ project: Project }> = ({ project }) => (
+// ------------- Reusable links (null-safe) -------------
+const ProjectLinks: React.FC<{ project?: Project | null }> = ({ project }) => (
   <div className="space-y-4 mb-12">
     <h2 className="text-3xl font-semibold tracking-tight mb-6">Project Links</h2>
     <div className="flex flex-wrap gap-4">
-      {project.github && (
+      {project?.github && (
         <a
           href={project.github}
           target="_blank"
@@ -17,7 +20,7 @@ const ProjectLinks: React.FC<{ project: Project }> = ({ project }) => (
           View Code
         </a>
       )}
-      {project.demo && (
+      {project?.demo && (
         <a
           href={project.demo}
           target="_blank"
@@ -28,7 +31,7 @@ const ProjectLinks: React.FC<{ project: Project }> = ({ project }) => (
           Live Demo
         </a>
       )}
-      {project.notebook && (
+      {project?.notebook && (
         <a
           href={project.notebook}
           target="_blank"
@@ -43,9 +46,8 @@ const ProjectLinks: React.FC<{ project: Project }> = ({ project }) => (
   </div>
 );
 
-
-
-const VailContent: React.FC<{ project: Project }> = ({ project }) => {
+// ------------- Main content (null-safe) -------------
+const VailContent: React.FC<{ project?: Project | null }> = ({ project }) => {
   return (
     <>
       {/* Project Links */}
@@ -100,12 +102,10 @@ const VailContent: React.FC<{ project: Project }> = ({ project }) => {
             </p>
           </div>
           <p className="mb-6">
-          This approach controls for any factors that affect all ski towns equally (like national housing trends) and 
-          any time-invariant differences between towns (like natural amenities). However, in order to run a DiD experiment, 
-          the treated and control groups must exhibit <strong>parallel pre-treatment trends</strong>, meaning that before the treatment occurs, 
-          the outcome trajectories of both groups move in a similar fashion. If this assumption is violated, the estimated treatment 
-          effect may be biased.
-
+            This approach controls for any factors that affect all ski towns equally (like national housing trends) and any time-invariant differences between towns (like natural amenities). However, in order to run a DiD experiment, 
+            the treated and control groups must exhibit <strong>parallel pre-treatment trends</strong>, meaning that before the treatment occurs, 
+            the outcome trajectories of both groups move in a similar fashion. If this assumption is violated, the estimated treatment 
+            effect may be biased.
           </p>
         </div>
       </div>
@@ -153,7 +153,6 @@ const VailContent: React.FC<{ project: Project }> = ({ project }) => {
             Where β₃ is our coefficient of interest, which is the causal effect of Vail acquisition. The γ<sub>i</sub> and δ<sub>t</sub> terms are town and year fixed effects.
             I used log transformations for dollar-denominated variables, which allowed me to view results as percentage changes. There were also robust standard errors, 
             which helps ensure that the inference on coefficients is reliable even if the variance of errors is not constant across observations.
-
           </p>
         </div>
       </div>
@@ -181,8 +180,6 @@ const VailContent: React.FC<{ project: Project }> = ({ project }) => {
           </p>
         </div>
       </div>
-
-      
 
       <div className="mb-12">
         <h2 className="text-3xl font-semibold tracking-tight mb-6">Challenges and Limitations</h2>
@@ -243,4 +240,25 @@ const VailContent: React.FC<{ project: Project }> = ({ project }) => {
   );
 };
 
-export default VailContent;
+// ------------- Page wrapper + SSG data -------------
+type PageProps = { project: Project | null };
+
+// If `Project` doesn’t include `id`, widen it locally
+type MaybeId = Project & { id?: string };
+
+const TARGET_ID = 'vail-causal';
+
+export default function VailPage({ project }: PageProps) {
+  return <VailContent project={project} />;
+}
+
+export const getStaticProps: GetStaticProps<PageProps> = async () => {
+  const list = (projects ?? []) as MaybeId[];
+  const project = list.find(p => p.id === TARGET_ID) ?? null;
+
+  if (!project) {
+    return { notFound: true };
+  }
+
+  return { props: { project } };
+};

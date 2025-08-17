@@ -8,7 +8,7 @@ This directory contains all the images used in your portfolio website.
 public/images/
 ├── README.md              # This file
 ├── avatar.jpg             # Your profile picture (optional)
-├── favicon.ico            # Website favicon, 
+├── favicon.ico            # Website favicon
 ├── projects/              # Project showcase images
 │   ├── churn-prediction.jpg
 │   ├── sales-dashboard.jpg

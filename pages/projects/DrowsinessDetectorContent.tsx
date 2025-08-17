@@ -3,10 +3,10 @@ import React from 'react';
 import type { GetStaticProps } from 'next';
 import { Github, Play, FileText } from 'lucide-react';
 
-// Adjust this import to match your data export.
-// It assumes ../../data/projects exports both `projects` (array) and `Project` (type).
+// Adjust the path if your data file lives elsewhere.
 import { projects, Project } from '../../data/projects';
 
+/** Render the link buttons safely even if `project` is missing */
 const ProjectLinks: React.FC<{ project?: Project | null }> = ({ project }) => (
   <div className="space-y-4 mb-12">
     <h2 className="text-3xl font-semibold tracking-tight mb-6">Project Links</h2>
@@ -48,20 +48,23 @@ const ProjectLinks: React.FC<{ project?: Project | null }> = ({ project }) => (
   </div>
 );
 
+/** Main content component (null-safe) */
 const DrowsinessDetectorContent: React.FC<{ project?: Project | null }> = ({ project }) => {
   return (
     <>
-      {/* Project Links */}
       <ProjectLinks project={project} />
 
       <section className="mb-12">
         <h2 className="text-3xl font-semibold tracking-tight mb-6">Introduction</h2>
         <div className="prose prose-lg mb-12">
           <p className="mb-6">
-            This project was inspired by personal experiences during the gap year between my undergraduate and graduate studies. While attending night classes in computer science after my full-time research job at a laboratory in Raleigh, NC, I sometimes struggled to stay awake during Zoom lectures. This led me to design a drowsiness detector that monitors eye activity using a webcam and alerts users with an audio cue when signs of drowsiness are detected.
+            This project was inspired by personal experiences during the gap year between my undergraduate and graduate studies.
+            While attending night classes in computer science after my full-time research job at a laboratory in Raleigh, NC,
+            I sometimes struggled to stay awake during Zoom lectures. This led me to design a drowsiness detector that monitors eye
+            activity using a webcam and alerts users with an audio cue when signs of drowsiness are detected.
           </p>
           <p className="mb-6">
-            The system relies on the Eye Aspect Ratio (EAR), a metric detailed in
+            The system relies on the Eye Aspect Ratio (EAR), a metric detailed in{' '}
             <a
               href="https://vision.fe.uni-lj.si/cvww2016/proceedings/papers/05.pdf"
               target="_blank"
@@ -92,8 +95,10 @@ const DrowsinessDetectorContent: React.FC<{ project?: Project | null }> = ({ pro
         <h2 className="text-3xl font-semibold tracking-tight mb-6">Methods</h2>
         <div className="prose prose-lg mb-12">
           <p className="mb-6">
-            The program uses dlib to detect facial landmarks, focusing on the regions around the eyes. The Eye Aspect Ratio (EAR) is a scalar value that is calculated by determining ratio of Euclidean distances between specific eye landmarks. If the EAR drops below a predefined threshold for more than one second, the system detects drowsiness and issues an alert.
-            When drowsiness is detected, the system displays a warning on the video feed and plays an audio alert using pyttsx3.
+            The program uses dlib to detect facial landmarks, focusing on the regions around the eyes. The Eye Aspect Ratio (EAR) is a scalar value
+            calculated from ratios of Euclidean distances between specific eye landmarks. If the EAR drops below a predefined threshold for more than
+            one second, the system detects drowsiness and issues an alert. When drowsiness is detected, the system displays a warning on the video feed
+            and plays an audio alert using pyttsx3.
           </p>
         </div>
       </section>
@@ -122,7 +127,6 @@ if avg_EAR < EAR_THRESHOLD:
         engine.say("Wake up!")
         engine.runAndWait()`}
           </pre>
-          <p className="mb-6">And it looks something like this:</p>
         </div>
       </section>
 
@@ -144,21 +148,26 @@ if avg_EAR < EAR_THRESHOLD:
   );
 };
 
-// --- Page wrapper + data fetching (SSG) ---
+// ---------------------- Page wrapper + SSG data ----------------------
 
 type PageProps = { project: Project | null };
 
+/** Page component that receives the project prop from getStaticProps */
 export default function DrowsinessDetectorPage({ project }: PageProps) {
   return <DrowsinessDetectorContent project={project} />;
 }
 
-export const getStaticProps: GetStaticProps<PageProps> = async () => {
-  const project =
-    (projects ?? []).find(
-      (p: Project) => p.id === 'drowsiness-detecter'
-    ) ?? null;
+/** Build-time data fetch: pick the project by its `id` */
+// If your Project type doesn't declare `id`, we widen it locally to avoid TS errors.
+type MaybeId = Project & { id?: string };
 
-  if (!project) return { notFound: true };
+export const getStaticProps: GetStaticProps<PageProps> = async () => {
+  const list = (projects ?? []) as MaybeId[];
+  const project = list.find((p) => p.id === 'drowsiness-detecter') ?? null;
+
+  if (!project) {
+    return { notFound: true };
+  }
 
   return { props: { project } };
 };
