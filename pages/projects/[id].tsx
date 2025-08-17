@@ -4,6 +4,7 @@ import { ArrowLeft, ExternalLink, Github, Play, FileText } from 'lucide-react';
 import { projects } from '../../data/projects';
 import Layout from '../../components/Layout';
 import { profile } from '../../data/profile';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
 // Import your project content components
 import StockNewsContent from './StockNewsContent';
@@ -11,8 +12,6 @@ import HousingPriceContent from './HousingPriceContent';
 import SpotifyWrappedContent from './SpotifyWrappedContent';
 import DrowsinessDetectorContent from './DrowsinessDetectorContent';
 import VailContent from './VailContent';
-
-
 
 const ProjectPage: React.FC = () => {
   const router = useRouter();
@@ -87,45 +86,6 @@ return (
           </div>
         )}
 
-        {/* Project Links
-        <div className="space-y-4 mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Project Links</h2>
-          <div className="flex flex-wrap gap-4">
-            {project.github && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center px-6 py-3 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors duration-200"
-              >
-                <Github size={20} className="mr-2" />
-                View Code
-              </a>
-            )}*/}
-            
-            {/* {project.demo && (
-              <a
-                href={project.demo}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
-              >
-                <Play size={20} className="mr-2" />
-                Live Demo
-              </a>
-            )} */}
-            {/* {project.notebook && (
-              <a
-                href={project.notebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors duration-200"
-              >
-                <FileText size={20} className="mr-2" />
-                View Notebook
-              </a>
-            )} */}
-
         {/* Render project-specific content here */}
         {renderProjectContent()}
 
@@ -143,6 +103,32 @@ return (
     </div>
   </Layout>
 );
+};
+
+// ADD THESE FUNCTIONS FOR STATIC GENERATION:
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths = [
+    { params: { id: 'vail-causal' } },
+    { params: { id: 'stock-news-sentiment-analysis' } },
+    { params: { id: 'housing-price-prediction' } },
+    { params: { id: 'spotify-wrapped-clone' } },
+    { params: { id: 'drowsiness-detector' } },
+  ];
+
+  return {
+    paths,
+    fallback: false, // Required for static export
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const id = params?.id as string;
+  
+  return {
+    props: {
+      id,
+    },
+  };
 };
 
 export default ProjectPage;

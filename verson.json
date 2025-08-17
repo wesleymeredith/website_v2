@@ -1,6 +1,0 @@
-{
-    "output": "out",
-    "rewrites": [
-      { "source": "/(.*)", "destination": "/index.html" }
-    ]
-  }
