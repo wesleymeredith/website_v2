@@ -117,23 +117,27 @@ if avg_EAR < EAR_THRESHOLD:
         </div>
       </section>
 
-      {/* Images */}
-      {project?.images && (
+      {/* Images with proper null checking */}
+      {project?.images && project.images.length > 0 && (
         <>
-          <section className="mb-12">
-            <img
-              src={project.images[1]}
-              alt={project.title}
-              className="w-full rounded-lg shadow-lg"
-            />
-          </section>
-          <section className="mb-12">
-            <img
-              src={project.images[2]}
-              alt={project.title}
-              className="w-full rounded-lg shadow-lg"
-            />
-          </section>
+          {project.images[1] && (
+            <section className="mb-12">
+              <img
+                src={project.images[1]}
+                alt={project.title || 'Project image'}
+                className="w-full rounded-lg shadow-lg"
+              />
+            </section>
+          )}
+          {project.images[2] && (
+            <section className="mb-12">
+              <img
+                src={project.images[2]}
+                alt={project.title || 'Project image'}
+                className="w-full rounded-lg shadow-lg"
+              />
+            </section>
+          )}
         </>
       )}
     </>
