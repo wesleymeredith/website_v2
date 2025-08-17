@@ -1,12 +1,17 @@
+// pages/projects/DrowsinessDetectorContent.tsx
 import React from 'react';
-import { Project } from '../../data/projects';
+import type { GetStaticProps } from 'next';
 import { Github, Play, FileText } from 'lucide-react';
 
-const ProjectLinks: React.FC<{ project: Project }> = ({ project }) => (
+// Adjust this import to match your data export.
+// It assumes ../../data/projects exports both `projects` (array) and `Project` (type).
+import { projects, Project } from '../../data/projects';
+
+const ProjectLinks: React.FC<{ project?: Project | null }> = ({ project }) => (
   <div className="space-y-4 mb-12">
     <h2 className="text-3xl font-semibold tracking-tight mb-6">Project Links</h2>
     <div className="flex flex-wrap gap-4">
-      {project.github && (
+      {project?.github && (
         <a
           href={project.github}
           target="_blank"
@@ -17,7 +22,7 @@ const ProjectLinks: React.FC<{ project: Project }> = ({ project }) => (
           View Code
         </a>
       )}
-      {project.demo && (
+      {project?.demo && (
         <a
           href={project.demo}
           target="_blank"
@@ -28,7 +33,7 @@ const ProjectLinks: React.FC<{ project: Project }> = ({ project }) => (
           Live Demo
         </a>
       )}
-      {project.notebook && (
+      {project?.notebook && (
         <a
           href={project.notebook}
           target="_blank"
@@ -43,9 +48,7 @@ const ProjectLinks: React.FC<{ project: Project }> = ({ project }) => (
   </div>
 );
 
-
-
-const DrowsinessDetectorContent: React.FC<{ project: Project }> = ({ project }) => {
+const DrowsinessDetectorContent: React.FC<{ project?: Project | null }> = ({ project }) => {
   return (
     <>
       {/* Project Links */}
@@ -58,14 +61,22 @@ const DrowsinessDetectorContent: React.FC<{ project: Project }> = ({ project }) 
             This project was inspired by personal experiences during the gap year between my undergraduate and graduate studies. While attending night classes in computer science after my full-time research job at a laboratory in Raleigh, NC, I sometimes struggled to stay awake during Zoom lectures. This led me to design a drowsiness detector that monitors eye activity using a webcam and alerts users with an audio cue when signs of drowsiness are detected.
           </p>
           <p className="mb-6">
-            The system relies on the Eye Aspect Ratio (EAR), a metric detailed in<a href="https://developer.spotify.com/documentation/web-api/" target="_blank" rel="noopener noreferrer" className="text-green-600 underline hover:bg-green-100 px-1 rounded">this paper</a> 
+            The system relies on the Eye Aspect Ratio (EAR), a metric detailed in
+            <a
+              href="https://vision.fe.uni-lj.si/cvww2016/proceedings/papers/05.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-green-600 underline hover:bg-green-100 px-1 rounded"
+            >
+              this paper
+            </a>
             , to measure eye closure.
           </p>
         </div>
       </section>
 
       <section className="mb-12">
-        <h2 className="text-3xl font-semibold tracking-tight mb-6">Setup & Installation</h2>
+        <h2 className="text-3xl font-semibold tracking-tight mb-6">Setup &amp; Installation</h2>
         <div className="prose prose-lg mb-12">
           <p className="mb-6">This project is implemented in Python and leverages the following libraries:</p>
           <ul className="list-disc list-inside mb-6">
@@ -82,9 +93,7 @@ const DrowsinessDetectorContent: React.FC<{ project: Project }> = ({ project }) 
         <div className="prose prose-lg mb-12">
           <p className="mb-6">
             The program uses dlib to detect facial landmarks, focusing on the regions around the eyes. The Eye Aspect Ratio (EAR) is a scalar value that is calculated by determining ratio of Euclidean distances between specific eye landmarks. If the EAR drops below a predefined threshold for more than one second, the system detects drowsiness and issues an alert.
-          When drowsiness is detected, the system
-      fisplays a warning on the video feed and
-      plays an audio alert using pyttsx3.
+            When drowsiness is detected, the system displays a warning on the video feed and plays an audio alert using pyttsx3.
           </p>
         </div>
       </section>
@@ -101,47 +110,55 @@ const DrowsinessDetectorContent: React.FC<{ project: Project }> = ({ project }) 
           </ul>
           <p className="mb-6">Here’s a simplified code snippet:</p>
           <pre className="bg-gray-100 rounded p-4 overflow-x-auto text-sm mb-6">
-            {`# Detect EAR for left and right eyes  
-left_EAR = Detect_Eye(leftEye)  
-right_EAR = Detect_Eye(rightEye)  
-avg_EAR = (left_EAR + right_EAR) / 2  
-          
-# Check for drowsiness  
-if avg_EAR < EAR_THRESHOLD:  
-    if time.time() - closed_eyes_start_time > DROWSINESS_THRESHOLD:  
-        # Trigger alert  
-        engine.say("Wake up!")  
+{`# Detect EAR for left and right eyes
+left_EAR = Detect_Eye(leftEye)
+right_EAR = Detect_Eye(rightEye)
+avg_EAR = (left_EAR + right_EAR) / 2
+
+# Check for drowsiness
+if avg_EAR < EAR_THRESHOLD:
+    if time.time() - closed_eyes_start_time > DROWSINESS_THRESHOLD:
+        # Trigger alert
+        engine.say("Wake up!")
         engine.runAndWait()`}
           </pre>
           <p className="mb-6">And it looks something like this:</p>
         </div>
       </section>
 
-      {/* Images with proper null checking */}
-      {project?.images && project.images.length > 0 && (
+      {/* Images */}
+      {project?.images?.length ? (
         <>
-          {project.images[1] && (
-            <section className="mb-12">
+          {project.images.slice(1, 3).map((src, idx) => (
+            <section key={idx} className="mb-12">
               <img
-                src={project.images[1]}
-                alt={project.title || 'Project image'}
+                src={src}
+                alt={project.title ?? 'Project image'}
                 className="w-full rounded-lg shadow-lg"
               />
             </section>
-          )}
-          {project.images[2] && (
-            <section className="mb-12">
-              <img
-                src={project.images[2]}
-                alt={project.title || 'Project image'}
-                className="w-full rounded-lg shadow-lg"
-              />
-            </section>
-          )}
+          ))}
         </>
-      )}
+      ) : null}
     </>
   );
 };
 
-export default DrowsinessDetectorContent;
+// --- Page wrapper + data fetching (SSG) ---
+
+type PageProps = { project: Project | null };
+
+export default function DrowsinessDetectorPage({ project }: PageProps) {
+  return <DrowsinessDetectorContent project={project} />;
+}
+
+export const getStaticProps: GetStaticProps<PageProps> = async () => {
+  const project =
+    (projects ?? []).find(
+      (p: Project) => p.id === 'drowsiness-detecter'
+    ) ?? null;
+
+  if (!project) return { notFound: true };
+
+  return { props: { project } };
+};
