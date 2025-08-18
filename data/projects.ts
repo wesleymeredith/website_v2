@@ -38,7 +38,7 @@ export const projects: Project[] = [
     images: ["/images/projects/ski-pic.png"],
     //github: "https://github.com/wesleymeredith/",
     //demo: "",
-    notebook: "/notebooks/vail.html",
+    notebook: "/vail.html",
     date: "2025"
   },
   {
