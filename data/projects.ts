@@ -36,7 +36,7 @@ export const projects: Project[] = [
     longDescription: "Here I collected and processed data for 7-vail acquired and 35 control ski towns via Census API, and used propensity score matching on demongraphies.",
     techStack: ["Python", "Causal Inference"],
     images: ["/images/projects/ski-pic.png"],
-    notebook: "https://wesleym.com/notebooks/letusski.html",
+    notebook: "/notebooks/letusski",
     date: "2025"
   },
   {
