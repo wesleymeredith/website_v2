@@ -36,7 +36,7 @@ export const projects: Project[] = [
     longDescription: "Here I collected and processed data for 7-vail acquired and 35 control ski towns via Census API, and used propensity score matching on demongraphies.",
     techStack: ["Python", "Causal Inference"],
     images: ["/images/projects/ski-pic.png"],
-    notebook: "/notebooks/letusski.html",
+    notebook: "https://wesleym.com/notebooks/letusski.html",
     date: "2025"
   },
   {
@@ -48,7 +48,7 @@ export const projects: Project[] = [
     images: ["/images/projects/sentiment-analysis.png", "/images/projects/senti1.png", "/images/projects/senti2.png"],
     github: "https://github.com/wesleymeredith/Financial-News-Sentiment-Analysis",
     //demo: "https://stock-sentiment-demo.com",
-    //notebook: "https://www.kaggle.com/wesleymeredith/housing-price-prediction",
+    notebook: "/notebooks/letusski.html",
     date: "2025"
   },
   {
