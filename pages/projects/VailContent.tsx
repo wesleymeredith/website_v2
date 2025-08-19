@@ -33,7 +33,7 @@ const ProjectLinks: React.FC<{ project?: Project | null }> = ({ project }) => (
       )}
       {project?.notebook && (
         <a
-          href={project.notebook}
+          href="/notebooks/vail_notebook.html"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors duration-200"
