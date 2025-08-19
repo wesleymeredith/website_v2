@@ -33,7 +33,7 @@ const ProjectLinks: React.FC<{ project?: Project | null }> = ({ project }) => (
       )}
       {project?.notebook && (
         <a
-          href="/notebooks/letusski.html"
+          href={project.notebook}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors duration-200"
