@@ -48,7 +48,7 @@ export const projects: Project[] = [
     images: ["/images/projects/sentiment-analysis.png", "/images/projects/senti1.png", "/images/projects/senti2.png"],
     github: "https://github.com/wesleymeredith/Financial-News-Sentiment-Analysis",
     //demo: "https://stock-sentiment-demo.com",
-    notebook: "/notebooks/letusski.html",
+    //notebook: "/notebooks/letusski.html",
     date: "2025"
   },
   {
