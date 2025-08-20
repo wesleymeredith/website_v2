@@ -60,7 +60,7 @@ const SpotifyWrappedContent: React.FC<{ project?: Project | null }> = ({ project
           <p className="mb-6">
             Music has always been an important part of my life, and Spotify’s annual
             “Wrapped” feature has become a cultural moment that I look forward to every winter.
-            I didn’t want to wait an entire year again, so I built a <strong>Spotify Wrapped Clone</strong>
+            I didn’t want to wait an entire year again, so I built a <strong>Spotify Wrapped Clone </strong>
             as a web application.
           </p>
           <p className="mb-6">
@@ -75,16 +75,15 @@ const SpotifyWrappedContent: React.FC<{ project?: Project | null }> = ({ project
         <h2 className="text-3xl font-semibold tracking-tight mb-6">How It Works</h2>
         <div className="prose prose-lg mb-12">
           <p className="mb-6">
-            The application uses the
-            <a
+            The application uses the<a
               href="https://developer.spotify.com/documentation/web-api/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-green-600 underline hover:bg-green-100 px-1 rounded"
             >
-              {' '}Spotify Web API
+              Spotify Web API
             </a>
-            {' '}and implements <strong>OAuth 2.0</strong> so users can securely log in with their Spotify accounts.
+            and implements <strong>OAuth 2.0</strong> so users can securely log in with their Spotify accounts.
             Once authenticated, the app requests a user’s top artists/songs. Spotify offers three time ranges, so
             users can view <em>short-term</em>, <em>medium-term</em>, or <em>long-term</em> stats.
           </p>
