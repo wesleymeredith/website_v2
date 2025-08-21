@@ -47,7 +47,7 @@ export const projects: Project[] = [
     techStack: ["Python", "Flask", "BERT", "PyTorch", "NLTK", "Natural Language Processing"],
     images: ["/images/projects/sentiment-analysis.png", "/images/projects/senti1.png", "/images/projects/senti2.png"],
     github: "https://github.com/wesleymeredith/Financial-News-Sentiment-Analysis",
-    //demo: "https://stock-sentiment-demo.com",
+    demo: "https://financial-news-sentiment-analysis.vercel.app/",
     //notebook: "/notebooks/letusski.html",
     date: "2025"
   },
