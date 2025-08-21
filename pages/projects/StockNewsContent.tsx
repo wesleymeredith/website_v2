@@ -82,7 +82,7 @@ const StockNewsContent: React.FC<{ project?: Project | null }> = ({ project }) =
       </div>
 
       {/* Images */}
-      {project?.images?.[2] && (
+      {project?.images?.[1] && (
         <div className="mb-12">
           <img
             src={project.images[2]}
@@ -91,7 +91,7 @@ const StockNewsContent: React.FC<{ project?: Project | null }> = ({ project }) =
           />
         </div>
       )}
-      {project?.images?.[1] && (
+      {project?.images?.[2] && (
         <div className="mb-12">
           <img
             src={project.images[1]}
