@@ -85,7 +85,7 @@ const StockNewsContent: React.FC<{ project?: Project | null }> = ({ project }) =
       {project?.images?.[1] && (
         <div className="mb-12">
           <img
-            src={project.images[2]}
+            src={project.images[1]}
             alt={project.title ?? 'Project image'}
             className="w-full rounded-lg shadow-lg"
           />
@@ -94,7 +94,7 @@ const StockNewsContent: React.FC<{ project?: Project | null }> = ({ project }) =
       {project?.images?.[2] && (
         <div className="mb-12">
           <img
-            src={project.images[1]}
+            src={project.images[2]}
             alt={project.title ?? 'Project image'}
             className="w-full rounded-lg shadow-lg"
           />
