@@ -65,7 +65,7 @@ const VailContent: React.FC<{ project?: Project | null }> = ({ project }) => {
             But here's the question that keeps local residents up at night: <strong>What happens to housing costs and wages when Vail comes to town?</strong>
           </p>
           <p className="mb-6">
-            As an data scientist, I knew this was the perfect opportunity to apply causal inference methods to a real-world policy question. This 
+            As a data scientist, I knew this was the perfect opportunity to apply causal inference methods to a real-world policy question. This 
             is my first experience using causal inference to estimate the impact of an event, so we will begin with a foundational model: difference-in-differences.
             Ski towns are already some of the most expensive places to live in America, and any additional price pressure could push out the very workers who keep these communities running,
             so let's investigate.
