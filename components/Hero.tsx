@@ -36,7 +36,7 @@ const Hero: React.FC = () => {
 
           {/* Current Role Badge  */}
           <a 
-            href="https://snappisites.com" 
+            href="https://www.southwest.com/" 
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-flex items-center px-4 py-2 bg-white border border-gray-200 rounded-lg shadow-sm mb-8 hover:bg-gray-50 hover:border-gray-300 transition-colors duration-200 cursor-pointer"

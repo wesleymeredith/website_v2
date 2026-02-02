@@ -26,8 +26,8 @@ export const profile: Profile = {
   name: "Wesley Meredith",
   title: "Data Scientist",
   currentRole: {
-    company: "Snappi Sites",
-    position: "Freelance Engineer",
+    company: "Southwest Airlines",
+    position: "Data Scientist",
     badge: undefined // Optional: remove if not applicable
   },
   description: [
